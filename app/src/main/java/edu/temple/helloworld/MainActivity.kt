@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,11 +19,20 @@ class MainActivity : AppCompatActivity() {
         // Initialize with views defined in Layout - the first one is done for you
         displayTextView = findViewById(R.id.displayTextView)
 
-        
+
         findViewById<Button>(R.id.clickMeButton).setOnClickListener {
-            displayTextView.text = "Hello, ${findViewById<EditText>(R.id.nameEditText).text}"
+            val nameEditText = findViewById<EditText>(R.id.nameEditText)
+
+            if (nameEditText.text.isNotEmpty()) {
+                displayTextView.text = "Hello, ${nameEditText.text}"
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Please enter a name",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
-
-
     }
 }
